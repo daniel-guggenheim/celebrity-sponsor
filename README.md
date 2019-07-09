@@ -38,10 +38,10 @@ Following is a summary of the steps that will be done on the platform:
 <img src="github_content/step1.png" alt="step 1" width="400">
 
 2. The web celebrity creates an image endorsing the company.<br/>
-<img src="github_content/step2.png" alt="step 2" width="700">
+<img src="github_content/step2.jpg" alt="step 2" width="700">
 
 3. The web celebrity posts the image on social media.<br/>
-<img src="github_content/step3.png" alt="step 3" width="570">
+<img src="github_content/step3.jpg" alt="step 3" width="570">
 
 4. The company renumerates the web celebrity.<br/>
 <img src="github_content/step4.png" alt="step 4" width="250">
