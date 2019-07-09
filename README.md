@@ -1,13 +1,13 @@
 # Advertisement platform - Django
 
-In this project, I designed and developed a web platform for advertisement in Django (Python). This project focused entirely on the platform design, back-end development and the minimum viable front-end (functionality was heavily prioritized over beauty).
+This web platform allows social media users to advertise products in behalf of companies in fun and innovative ways.
 
-Django is used for the backend. Some additionnal libraries are used, such as *PIL* for the image processing or *allauth* to handle logins with social media.
+This project focused on:
+- Platform architecture design
+- Backend development: **Django** (Python), with some additionnal libraries (*PIL* for the image processing or *allauth* to handle logins with social media.)
+- Minimum viable front-end (functionality was heavily prioritized over beauty): **HTML/CSS/JavaScript**, and **jQuery** for the image manipulation.
 
-The frontend is created using HTML/CSS/JavaScript, and jQuery for the image manipulation.
-
-
-You can find all the code in the ``src/`` folder
+You can find all the code in the ``src/`` folder.
 
 **Table of Contents:**
 
