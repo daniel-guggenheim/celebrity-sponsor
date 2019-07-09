@@ -1,0 +1,242 @@
+/****** MENU ******/
+#menu ul {
+    list-style-type: none;
+    margin: 20px 120px 30px 120px;
+    padding: 10px 20px;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#menu li {
+    display: inline;
+    padding: 0;
+}
+
+/*#menu li:last-child {*/
+/*border-right: none;*/
+/*}*/
+
+#menu #user-name {
+    color: lightgrey;
+}
+
+#menu .pull-right {
+    float: right;
+}
+
+#menu li a {
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#menu li a:hover {
+    background-color: #111;
+}
+
+#menu .active {
+    background-color: #666;
+}
+
+/****** MAIN ******/
+#main {
+    margin: 20px 120px 30px 120px;
+    text-align: center;
+}
+
+
+/****** UPLOAD TRANSFORMABLE IMAGE ******/
+#body-uploadTransformableImage .old_image{
+    width: 200px;
+}
+#body-uploadTransformableImage .warning{
+    color:red;
+}
+
+
+/****** COMPANY DETAILS ******/
+
+#body-company_details #main {
+    /*text-align: left;*/
+    /*margin: auto 0;*/
+    /*margin: 20px 120px 30px 120px;*/
+}
+
+#body-company_details #block-details {
+    display: inline-block;
+    text-align: left
+}
+
+/* --- TABLE --- */
+table {
+    border-spacing: 25px 5px;
+}
+
+/*first column which contains the category*/
+table td:nth-child(1) {
+    font-weight: bold;
+}
+
+/*second column which contains the object*/
+table td:nth-child(2) {
+    border: 1px solid black;
+    padding: 5px 15px;
+    background-color: aliceblue;
+}
+
+.update-info {
+    margin-top: 20px;
+
+}
+
+.update-info a {
+    color: white;
+    text-align: center;
+    padding: 7px 12px;
+    text-decoration: none;
+    background-color: #4481ba;
+    /*background-color: #333;*/
+    border-radius: 4px;
+}
+
+.update-info a:hover {
+    background-color: #41689e;
+    /*background-color: #111;*/
+}
+
+/****** SHOW UPLOADED IMAGES GALLERY ******/
+
+#body-show-uploaded-images-gallery .transformation_block {
+    display: inline-block;
+    margin: 10px 0px 20px 0;
+}
+
+#body-show-uploaded-images-gallery img {
+    display: inline-block;
+    margin: 0 20px;
+    width: 200px;
+}
+
+#body-show-uploaded-images-gallery .image_changed img {
+    /*float: left;*/
+}
+
+/*#body-show-uploaded-images-gallery .description_changed {*/
+/*clear: both;*/
+/*}*/
+
+#body-show-uploaded-images-gallery table {
+    /*display: inline-block;*/
+}
+
+#body-show-uploaded-images-gallery .description {
+    /*display: inline-block;*/
+}
+
+#body-show-uploaded-images-gallery .update-info {
+    margin: 12px 0 20px 0;
+}
+
+
+/****** USER PROPOSITIONS LIST ******/
+
+#body-user_propositions_list .transformation_block {
+    display: inline-block;
+    margin: 10px 0px 20px 0;
+}
+
+#body-user_propositions_list img {
+    display: inline-block;
+    margin: 0 20px;
+    width: 200px;
+}
+
+
+#body-user_propositions_list .update-info {
+    margin: 12px 0 20px 0;
+}
+
+
+/****** CAMPAIGN LIST ******/
+
+#body_campaign_list #main {
+    text-align: left;
+}
+
+#body_campaign_list .campaign_element {
+    margin: 10px 0 35px 0;
+}
+
+/****** CAMPAIGN DETAILS ******/
+
+#body_campaign_details #main {
+    text-align: left;
+}
+
+/****** WORKER SELECT CAMPAIGN ******/
+
+#body-worker_select_campaign .campaign_all {
+    width: 100%;
+    /*overflow:auto;*/
+}
+
+#body-worker_select_campaign .campaign_list {
+    /*float:left;*/
+    /*width: 50%;*/
+    display: inline-block;
+}
+
+#body-worker_select_campaign .campaign_element {
+    text-align: left;
+    padding:3px;
+    margin:5px;
+}
+
+#body-worker_select_campaign .normalBorder {
+     border: solid black 1px;
+}
+
+#body-worker_select_campaign .selectedBorder {
+    border: solid orange 2px;
+}
+
+#body-worker_select_campaign .campaign_element img {
+    width: 100px;
+}
+
+#body-worker_select_campaign .company_name {
+    font-weight: bold;
+}
+
+#body-worker_select_campaign .campaign_information {
+    /*float:right;*/
+}
+
+#body-worker_select_campaign .pay {
+    font-style: italic;
+    color:green;
+}
+
+#body-worker_select_campaign .error {
+    font-weight: bold;
+    color:red;
+}
+
+
+
+/****** USER PROPOSITION DETAIL ******/
+#body-showModifiedImage .showImage img {
+    max-width: 400px;
+    max-height: 300px;
+}
+#body-showModifiedImage .showImage {
+    display: inline-block;
+    margin:20px;
+}
+
+
+
+
+
+/****** ADD COMPANY PROPOSITION ******/

@@ -1,0 +1,66 @@
+{% extends "imageModifier/base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% block title %}Here is your image!{% endblock title %}
+
+
+{% block bodyID %}body-showModifiedImage{% endblock bodyID %}
+
+{% block mainContent %}
+    <div>
+        <a href="{% url 'imageModifier:uploadTransformableImage' user_proposition.pk %}">Upload new picture</a>
+        <a href="{% url 'imageModifier:image_processing' user_proposition.pk %}">Retouch the image</a>
+    </div>
+    <h4>Details of your proposition to the company</h4>
+    {% if user_proposition.transformedimagebuilder.base_image %}
+        <div class="showImage">
+            <img src="{{ user_proposition.transformedimagebuilder.base_image.url }}">
+        </div>
+        {% if user_proposition.transformedimagebuilder.intermediary_image %}
+            <div class="showImage">
+                <img src="{{ user_proposition.transformedimagebuilder.intermediary_image.url }}">
+            </div>
+        {% endif %}
+    {% else %}
+        <p>No image uploaded yet. Upload your picture <a
+                href="{% url 'imageModifier:uploadTransformableImage' user_proposition.pk %}">here</a>!</p>
+    {% endif %}
+    <table>
+        <tr>
+            <td>Last update:</td>
+            {% if user_proposition.transformedimagebuilder %}
+                <td>{{ user_proposition.transformedimagebuilder.last_update_date|naturaltime }}</td>
+            {% else %}
+                <td>{{ user_proposition.last_update_date|naturaltime }}</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Created:</td>
+            <td>{{ user_proposition.creation_date|naturaltime }}</td>
+        </tr>
+
+
+        <tr>
+            <td>Company name:</td>
+            <td>{{ user_proposition.auction_element.company_proposition.campaign.company.name }}</td>
+        </tr>
+        {% if proposition.auction_element.company_proposition.expiration_date %}
+            <tr>
+                <td>Remaining time to make proposition:</td>
+                <td>{{ user_proposition.auction_element.company_proposition.expiration_date }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td>Money earnt:</td>
+            <td>CHF {{ user_proposition.auction_element.final_payment|floatformat:2|intcomma }}</td>
+        </tr>
+    </table>
+    <p>Campaign headline:
+        <span>{{ user_proposition.auction_element.company_proposition.campaign.headline }}</span>
+    </p>
+    <p>Campaign description and instructions:
+        <span>{{ user_proposition.auction_element.company_proposition.campaign.description }}</span>
+    </p>
+
+{% endblock mainContent %}

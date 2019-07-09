@@ -1,0 +1,29 @@
+{% extends "imageModifier/base.html" %}
+
+{% block title %}{% block head_title %}{% endblock %}{% endblock title %}
+{% block style %}{% block extra_head %}{% endblock %}{% endblock style %}
+
+
+{% block bodyID %}body-user-related{% endblock bodyID %}
+
+
+{% block mainContent %}
+{% block body %}
+
+    {% if messages %}
+        <div>
+            <strong>Messages:</strong>
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+    {% endblock %}
+{% block extra_body %}
+{% endblock %}
+
+{% endblock mainContent %}

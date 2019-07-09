@@ -1,0 +1,29 @@
+{% extends "imageModifier/base_logoGallery.html" %}
+{% load staticfiles %}
+
+{% block title %}Upload company image{% endblock %}
+{% block bodyID %}body-uploadCompanyImage{% endblock %}
+
+
+{% block menu-uploadCompanyImage %}active{% endblock %}
+
+
+{% block mainContent %}
+    <!-- FORM -->
+    <form id="formCompImage" action="{% url 'imageModifier:uploadCompanyImage' %}" method="post"
+          enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>{{ form.uploaded_image.label_tag }}</h1>
+
+        <p>{{ form.non_field_errors }}</p>
+
+        <p>
+            {{ form.uploaded_image.errors }}
+            {{ form.uploaded_image }}
+        </p>
+        <p><input type="submit" value="Upload"/></p>
+    </form>
+
+    {{ block.super }}
+
+{% endblock %}

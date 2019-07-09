@@ -1,0 +1,24 @@
+{% extends "imageModifier/base.html" %}
+{% load staticfiles %}
+
+{% block style %}<link rel="stylesheet" href="{% static 'imageModifier/css/gallery.css' %}">{% endblock style %}
+
+{% block mainContent %}
+ <!-- UPLOADED IMAGES GALLERY -->
+    {% if companyLogoList %}
+        <div id="gallery">
+            {% for logo in companyLogoList %}
+                <div class="image" data-id="{{ logo.pk }}">
+                    <a href="{{ logo.companyImageUploaded.url }}">
+                        <img src="{{ logo.companyImageUploaded.url }}">
+
+                        <span class="description">{{ logo.companyName }}</span>
+                    </a>
+
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No logo image yet.</p>
+    {% endif %}
+{% endblock mainContent %}

@@ -1,0 +1,22 @@
+{% extends "imageModifier/base_logoGallery.html" %}
+{% load staticfiles %}
+
+{% block title %}Upload company image{% endblock %}
+{% block bodyID %}body-uploadCompanyImage{% endblock %}
+
+
+{% block menu-uploadCompanyImage %}active{% endblock %}
+
+
+{% block mainContent %}
+    <!-- FORM -->
+    <form id="formCompImage" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            {{ form.as_p }}
+        <p><input type="submit" name="update" value="Upload"/></p>
+        <p><input type="submit" name="next_step" value="Next step"/></p>
+    </form>
+
+    {{ block.super }}
+
+{% endblock %}

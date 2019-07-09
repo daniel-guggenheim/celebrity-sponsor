@@ -1,0 +1,33 @@
+{% extends "imageModifier/base.html" %}
+
+{% block title %}Company details{% endblock title %}
+{% block style %}{% endblock style %}
+{% block script %}{% endblock script %}
+
+
+{% block bodyID %}body-company_details{% endblock bodyID %}
+{% block menu-company_details %}active{% endblock %}
+
+{% block mainContent %}
+    <h2>Company details</h2>
+    <div id="block-details">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>{{ company.name }}</td>
+            </tr>
+            <tr>
+                <td>Abbreviation name:</td>
+                <td>{{ company.abrev_name }}</td>
+            </tr>
+            <tr>
+                <td>Last modified by:</td>
+                <td>{{ company.created_by.username }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="update-info">
+        <a href="{% url 'aiaUsers:company_update' pk=company.pk %}">Change company information</a>
+    </div>
+{% endblock mainContent %}

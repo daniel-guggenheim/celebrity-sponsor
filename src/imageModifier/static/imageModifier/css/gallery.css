@@ -1,0 +1,44 @@
+
+/****** LOGO GALLERY ******/
+div.image {
+    margin: 5px;
+    padding: 2px;
+    float: left;
+    width: 180px;
+}
+
+#gallery .normalBorder {
+    border: 1px solid #ccc;
+}
+
+#gallery .selectedBorder{
+    border: solid 2px #ff9900;
+}
+
+
+div.image:hover {
+    border: 1px solid #777;
+}
+
+div.image img {
+
+    width: 100%;
+    height: auto;
+}
+
+div.image a {
+    text-decoration:none;
+    color:black;
+}
+
+span.description {
+    padding: 0px;
+    text-align: center;
+    width:160px;
+    font-style: italic;
+}
+
+div#gallery {
+    margin: 0 auto;
+    text-align: center;
+}

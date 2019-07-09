@@ -1,0 +1,76 @@
+{% extends "imageModifier/base.html" %}
+{% load humanize %}
+
+{% block title %}Add a proposition{% endblock title %}
+{% block style %}{% endblock style %}
+{% block script %}
+    <script type="text/javascript">
+        var mean_like_nb = 0
+        function showValue(newValue) {
+            document.getElementById("range").innerHTML = newValue;
+            mean_like_nb = newValue
+        }
+    </script>
+{% endblock script %}
+{% block bodyID %}body_add_company_proposition{% endblock bodyID %}
+{% block menu-add_company_proposition %}active{% endblock %}
+
+
+{% block mainContent %}
+    {#<form action="{% url 'campaignManager:start_campaign' %}" method="post">#}
+    <form action="" method="post">
+
+        {% csrf_token %}
+        {% for field in proposition_form %}
+            {% if field.name == 'workers_selected' %}
+                <p><input type="submit" name="update" value="Apply filters"/></p>
+                {% for worker_object in field.field.queryset %}
+                    {% for radio in field %}
+                        {% if forloop.counter == forloop.parentloop.counter %}
+                            <p>
+                                <label class="worker" for="{{ radio.id_for_label }}">
+                                    <span class="radio">{{ radio.tag }}</span>
+                                    {% if worker_object.first_name %}
+                                        <span class="workername">{{ worker_object.first_name }}</span>
+                                        <span class="username"></span>
+                                    {% else %}
+                                        <span class="workername">{{ worker_object.username }}</span>
+                                    {% endif %}
+                                    <br>
+                                    <span>Followers number: {{ worker_object.user_details.nb_of_followers_at_last_check|intword }}</span><br>
+                                    <span>Average number of like: {{ worker_object.user_details.average_nb_of_like_in_10_last_pictures_at_last_check|intword }}</span><br>
+                                    <span>Successful past collaborations: {{ worker_object.user_details.number_of_successful_past_collaborations|apnumber }}</span><br>
+                                    {{ worker_object.user_details.category_text }}
+                                </label>
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+
+            {% else %}
+                {% if field.name == 'filter_nb_of_followers' %}
+                    <hr>
+                    <input type="submit" name="next_step" value="Web stars selected? Go to next page!"/>
+                    <h2>Web star choices</h2>
+{#                    <p>Mean number of likes web stars must have:#}
+{#                        <input type="range" min="0" max="10000" value="0" default="0" step="100"#}
+{#                               onchange="showValue(this.value)"/>#}
+{#                        <span id="range">0</span>#}
+{#                    </p>#}
+                {% endif %}
+                <div class="fieldWrapper">
+                    {{ field.errors }}
+                    {{ field.label_tag }} {{ field }}
+                    {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        {#        {{ proposition_form.as_p }}#}
+        <input type="submit" name="next_step" value="Go to next page"/>
+    </form>
+
+
+
+{% endblock mainContent %}

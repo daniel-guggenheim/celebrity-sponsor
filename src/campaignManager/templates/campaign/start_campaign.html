@@ -1,0 +1,22 @@
+{% extends "imageModifier/base.html" %}
+
+{% block title %}Start new campaign{% endblock title %}
+{% block style %}{% endblock style %}
+{% block script %}{% endblock script %}
+
+
+{% block bodyID %}body_start_campaign{% endblock bodyID %}
+{% block menu-start_campaign %}active{% endblock %}
+
+
+{% block mainContent %}
+{#<form action="{% url 'campaignManager:start_campaign' %}" method="post">#}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ campaign_form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+
+
+{% endblock mainContent %}

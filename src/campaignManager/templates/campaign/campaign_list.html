@@ -1,0 +1,31 @@
+{% extends "imageModifier/base.html" %}
+
+{% block title %}My campaigns{% endblock title %}
+{% block style %}{% endblock style %}
+{% block script %}{% endblock script %}
+
+
+{% block bodyID %}body_campaign_list{% endblock bodyID %}
+{% block menu-campaign_list %}active{% endblock %}
+
+
+{% block mainContent %}
+    {% if my_campaign_list %}
+        <h1>My campaigns</h1>
+        {% for campaign in my_campaign_list %}
+            <div class="campaign_element">
+                <h3>{{ campaign.headline }}</h3>
+
+                <p>{{ campaign.description }}</p>
+
+                <p>Number of group of proposition made: {{ campaign.get_nb_of_company_proposition }}</p>
+
+                <p>Last modified by: <em>{{ campaign.last_modified_by }}</em></p>
+
+                <p class="update-info"><a href="{% url 'campaignManager:campaign_details' campaign.pk %}">Campaign details</a></p>
+            </div>
+            <hr>
+        {% endfor %}
+    {% endif %}
+
+{% endblock mainContent %}

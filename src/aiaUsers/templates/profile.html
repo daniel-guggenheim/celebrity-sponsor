@@ -1,0 +1,24 @@
+{% extends "imageModifier/base.html" %}
+
+{% block title %}{% endblock title %}
+{% block style %}{% endblock style %}
+{% block script %}{% endblock script %}
+
+
+{% block bodyID %}body-profile{% endblock bodyID %}
+{% block menu-profile %}active{% endblock %}
+
+
+{% block mainContent %}
+
+    <h2>
+        Welcome {{ request.user.username }}
+    </h2>
+    <p>
+        User type: <b>{% if request.user.user_details.is_company_user_self %}Company
+        {% elif request.user.user_details.is_worker_user_self %}Celebrity
+        {% elif request.user.user_details.is_all_user_self %}All access
+    {% endif %}</b>
+    </p>
+
+{% endblock mainContent %}

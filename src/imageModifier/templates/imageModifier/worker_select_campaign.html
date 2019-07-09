@@ -1,0 +1,78 @@
+{% extends "imageModifier/base.html" %}
+{% load humanize %}
+
+{% block title %}Select campaign{% endblock title %}
+{% block style %}{% endblock style %}
+{% block script %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script>
+        var lastAuctionElemSelected = null;
+        $(document).ready(function () {
+            $(".campaign_element").click(function () {
+                if (lastAuctionElemSelected != null) {
+                    lastAuctionElemSelected.removeClass("selectedBorder");
+                    lastAuctionElemSelected.addClass("normalBorder");
+                }
+                var selectedAuctionElem = $(this)
+                var pk = selectedAuctionElem.attr("data-id");
+                $("#id_select_auction_element").attr("value", pk);
+                selectedAuctionElem.addClass("selectedBorder");
+                selectedAuctionElem.removeClass("normalBorder");
+                lastAuctionElemSelected = selectedAuctionElem
+
+                {#        console.log(pk);#}
+            });
+        });
+    </script>
+
+
+
+{% endblock script %}
+
+
+{% block bodyID %}body-worker_select_campaign{% endblock bodyID %}
+{% block menu-worker_select_campaign %}active{% endblock %}
+
+
+{% block mainContent %}
+    <p class="error">{{ error_message }}</p>
+    {% if auction_elements %}
+        <p>Select here the campaign and the company you want to work with.</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input id="id_select_auction_element" name="select_auction_element" type="hidden" value="None"/>
+            <input type="submit" value="Next page"/>
+        </form>
+
+
+        <div class="campaign_all">
+{#            {% with company_prop=company_propositions.0 %}#}
+{#                <div class="campaign_information">#}
+{#                    <h2>Related campaign information:</h2>#}
+{##}
+{#                    <p>Company: {{ company_prop.campaign.company.name }}</p>#}
+{##}
+{#                    <p>Payment: CHF {{ company_prop.money_that_will_be_paid_per_worker|floatformat:2|intcomma }}</p>#}
+{#                </div>#}
+{#            {% endwith %}#}
+
+            <div class="campaign_list">
+                {% for auction_elem in auction_elements %}
+                    {% with comp_prop=auction_elem.company_proposition %}
+                        <div class="campaign_element normalBorder" data-id="{{ auction_elem.pk }}">
+                            <img src="{{ comp_prop.campaign.company_logo_representative.companyImageUploaded.url }}"><br>
+                            <span class="company_name">{{ comp_prop.campaign.company.name }}</span><br>
+                            <span class="headline">{{ comp_prop.campaign.headline |truncatechars:40 }}</span><br>
+                            <span class="pay">Get paid: CHF {{ auction_elem.final_payment|floatformat:2|intcomma }}</span><br>
+{#                            <span>pk= {{ auction_elem.pk }} </span>#}
+                        </div>
+                    {% endwith %}
+                {% endfor %}
+            </div>
+            {#        <hr width="1" size="500">#}
+        </div>
+    {% else %}
+        <h2>Sorry, there is no auction yet to select. Come back later!</h2>
+    {% endif %}
+
+{% endblock mainContent %}

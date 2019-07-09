@@ -1,0 +1,85 @@
+{% extends "imageModifier/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Modify your picture!{% endblock title %}
+
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'imageModifier/css/gallery.css' %}">
+    <link rel="stylesheet" href="{% static 'imageModifier/css/modifyImageCSS.css' %}">
+    <style>
+        #container {
+            background-image: url("{{ transformedimagebuilder.base_image.url }}")
+        }
+    </style>
+{% endblock style %}
+
+
+{% block script %}
+    <script>
+        var logo_id_form_selector_text = "#{{ image_property_form.company_logo.auto_id }}"
+        var logo_width_form_selector_text = "#{{ image_property_form.image_parameter_logo_width.auto_id }}"
+        var logo_left_pos_form_selector_text = "#{{ image_property_form.image_parameter_logo_left_position.auto_id }}"
+        var logo_top_pos_form_selector_text = "#{{ image_property_form.image_parameter_logo_top_position.auto_id }}"
+        var container_reduction_ratio_form_selector_text = "#{{ image_property_form.image_parameter_base_image_ratio.auto_id }}"
+
+        var base_image_width = {{ transformedimagebuilder.base_image.width }},
+                base_image_height = {{ transformedimagebuilder.base_image.height }}
+    </script>
+
+    <link rel="stylesheet" href="{% static 'imageModifier/jquery/jquery-ui.min.css' %}">
+    <script src="{% static 'imageModifier/jquery/jquery.js' %}"></script>
+    <script src="{% static 'imageModifier/jquery/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'imageModifier/myscripts/image_processing_script.js' %}"></script>
+{% endblock script %}
+
+
+{% block bodyID %}body-image_processing{% endblock bodyID %}
+{% block menu-image_processing %}active{% endblock %}
+
+
+{% block mainContent %}
+    <div>
+        <a href="{% url 'imageModifier:uploadTransformableImage' user_proposition.pk %}">Change your background image</a>
+        <a href="{% url 'imageModifier:user_proposition_detail' user_proposition.pk %}">Don't save the changes</a>
+    </div>
+    <p id="tempInfo"></p>
+    <p id="tempInfo2"></p>
+
+    <!-- MODIFY IMAGE-->
+    <div id="container">
+        <div id="logoID">
+            <img id="imgLogoID" src="{% if companyLogoList %}{{ companyLogoList.0.companyImageUploaded.url }}{% endif %}">
+        </div>
+    </div>
+
+
+    <!-- SAVE BUTTON -->
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ image_property_form.as_p }}
+{#           <input id="id_image_parameter_logo_width" name="image_parameter_logo_width" type="hidden" value="None" />#}
+        <div id="saveButton">
+            <input id="goButton" type="submit" value="Save image"/>
+        </div>
+    </form>
+
+    <!-- UPLOADED IMAGES GALLERY -->
+    {% if companyLogoList %}
+        <div id="gallery">
+            {% for logo in companyLogoList %}
+                <div {% if forloop.counter == 1 %}id="first-image"{% endif %} class="image normalBorder" data-id="{{ logo.pk }}">
+                    <a href="#">
+                        <img src="{{ logo.companyImageUploaded.url }}">
+
+                        <span class="description">{{ logo.companyName }}</span>
+                    </a>
+
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>The company has not uploaded any image yet. They probably want to arrange this personally with you.</p>
+    {% endif %}
+
+{% endblock mainContent %}

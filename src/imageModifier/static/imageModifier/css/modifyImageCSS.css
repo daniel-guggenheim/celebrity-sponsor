@@ -1,0 +1,30 @@
+
+/****** IMAGE MANIPULATION ******/
+#container {
+    width: 500px;
+    padding: 0;
+    border: 3px solid black;
+    overflow: hidden;
+    margin: 0 auto;
+    background-repeat: no-repeat;
+}
+
+#logoID {
+    float: left;
+    border: 1px dashed black;
+    width: 100px;
+}
+
+#logoID img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+
+/****** SAVE BUTTON ******/
+#saveButton {
+    margin: 10px auto;
+    color: blue;
+    text-align: center;
+}

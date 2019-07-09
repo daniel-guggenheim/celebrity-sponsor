@@ -1,0 +1,92 @@
+{% extends "imageModifier/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Campaign{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'imageModifier/css/gallery.css' %}">{% endblock style %}
+{% block script %}{% endblock script %}
+
+
+{% block bodyID %}body_campaign_details{% endblock bodyID %}
+{% block menu-campaign_details %}active{% endblock %}
+
+
+{% block mainContent %}
+    {% if my_campaign %}
+        <h1>Campaign detail</h1>
+        <div>
+            <p>Headline: {{ my_campaign.headline }}</p>
+
+            <p>Description: {{ my_campaign.description }}</p>
+
+            <p>Number of propositions made: {{ my_campaign.get_nb_of_company_proposition }}</p>
+
+            <p>Last modified by: <em>{{ my_campaign.last_modified_by }}</em></p>
+
+            <p class="update-info"><a href="{% url 'campaignManager:modify_campaign' my_campaign.pk %}">Modify campaign</a></p>
+        </div>
+
+        <hr>
+        <p class="update-info"><a href="{% url 'campaignManager:add_company_proposition' my_campaign.pk %}">Add new
+            proposition</a></p>
+        <p></p>
+        {% if company_proposition_list %}
+            {% for proposition in company_proposition_list %}
+                <div class="campaign_element">
+                    <h1>Proposition {{ forloop.counter }}</h1>
+
+                    <p>Number of accepted people: {{ proposition.nb_of_people_accepted }}</p>
+
+                    <p>Money paid per worker: {{ proposition.money_that_will_be_paid_per_worker }}</p>
+
+                    <p>List of worker selected:
+                        {% if proposition.workers_selected.all %}
+                            {% for worker in proposition.workers_selected.all %}
+                                <span>{{ worker.username }} ; </span>
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+
+                    <p>Last modified by: <em>{{ proposition.last_modified_by }}</em></p>
+
+                    <p class="update-info"><a href="{% url 'campaignManager:modify_company_proposition' proposition.pk %}">Modify
+                        proposition</a></p>
+                </div>
+                <hr>
+            {% endfor %}
+        {% endif %}
+
+
+        {% if logos_list %}
+            <h2>Selected logos:</h2>
+            <p class="update-info"><a href="{% url 'imageModifier:select_upload_campaign_logos' my_campaign.pk %}">Change selected
+                logos</a></p>
+            <h4>Logo representative:</h4>
+            <div class="image">
+                <a href="{{ my_campaign.company_logo_representative.companyImageUploaded.url }}">
+                    <img src="{{ my_campaign.company_logo_representative.companyImageUploaded.url }}">
+                </a>
+            </div>
+{#            TODO:Change the style of this page...#}
+            <h4 style="clear:both;">Other logos for the webstar to choose from:</h4>
+            <div id="gallery">
+                {% for logo in logos_list %}
+                    <div class="image" data-id="{{ logo.pk }}">
+                        <a href="{{ logo.companyImageUploaded.url }}">
+                            <img src="{{ logo.companyImageUploaded.url }}">
+                        </a>
+
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="update-info"><a href="{% url 'imageModifier:select_upload_campaign_logos' my_campaign.pk %}">Add logos to
+                the campaign</a></p>
+        {% endif %}
+
+
+
+
+    {% endif %}
+
+{% endblock mainContent %}

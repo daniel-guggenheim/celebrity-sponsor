@@ -1,0 +1,95 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Image Modifier App{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'imageModifier/css/baseCSS.css' %}">
+    {% block style %}{% endblock style %}
+    {% block script %}{% endblock script %}
+</head>
+
+<body id="{% block bodyID %}wrapper{% endblock %}">
+<div id="header">
+    {% block header %}{% endblock %}
+</div>
+
+{% block menu %}
+    <div id="menu">
+        <ul>
+            {% if not request.user.is_authenticated %}
+                <li><a class="{% block menu-index %}inactive{% endblock %}"
+                       href="{% url 'index' %}">Home</a>
+                </li>
+            {% endif %}
+
+            {% if request.user.user_details.is_company_user_self %}
+                <li><a class="{% block menu-start_campaign %}inactive{% endblock %}"
+                       href="{% url 'campaignManager:start_campaign' %}">Start campaign</a>
+                </li>
+                <li><a class="{% block menu-campaign_list %}inactive{% endblock %}"
+                       href="{% url 'campaignManager:campaign_list' %}">My campaigns</a>
+                </li>
+            {% endif %}
+            {% if request.user.user_details.is_worker_user_self %}
+                <li>
+                    <a class="{% block menu-worker_select_campaign %}inactive{% endblock %}"
+                       href="{% url 'imageModifier:worker_select_campaign' %}">Participate in new campaign</a>
+                </li>
+{#                <li>#}
+{#                    <a class="{% block menu-uploadTransformableImage %}inactive{% endblock %}"#}
+{#                       href="{% url 'imageModifier:uploadTransformableImage' %}">Transform new image</a>#}
+{#                </li>#}
+                <li>
+                    <a class="{% block menu-user_propositions_list %}inactive{% endblock %}"
+                       href="{% url 'imageModifier:user_propositions_list' %}">Current campaigns</a>
+                </li>
+            {% endif %}
+            <span class="pull-right">
+            {% if request.user.is_authenticated %}
+
+                <li id="user-name">
+                    Signed in as <b>{{ request.user.username }}</b>
+                </li>
+                {% if request.user.user_details.is_company_user_self %}
+                    <li>
+                        <a class="{% block menu-company_details %}inactive{% endblock %}"
+                           href="{% url 'aiaUsers:company_details' %}">My company</a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a class="{% block menu-profile %}inactive{% endblock %}"
+                       href="{% url 'aiaUsers:account_profile' %}">My profile</a>
+                </li>
+                <li>
+                    <a class="{% block menu-logout %}inactive{% endblock %}"
+                       href="{% url 'account_logout' %}">Log out</a>
+                </li>
+            {% else %}
+                <li>
+                    <a class="{% block menu-signup %}inactive{% endblock %}"
+                       href="{% url 'account_signup' %}">Sign up</a>
+                </li>
+                <li>
+                    <a class="{% block menu-login %}inactive{% endblock %}"
+                       href="{% url 'account_login' %}">Sign in</a>
+                </li>
+            {% endif %}
+        </span>
+            {#                <li>#}
+            {#                    <a class="{% block menu-create_and_show_transformable_image %}inactive{% endblock %}"#}
+            {#                       href="#">View transformed images</a>#}
+            {#                </li>#}
+        </ul>
+    </div>
+{% endblock menu %}
+
+<div id="main">
+    {% block mainContent %}{% endblock mainContent %}
+</div>
+<div id="footer">
+    {% block footerContent %}{% endblock footerContent %}
+</div>
+
+</body>
+</html>

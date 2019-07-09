@@ -1,0 +1,35 @@
+{% extends "imageModifier/base.html" %}
+{% load humanize %}
+
+{% block title %}Upload a picture to transform!{% endblock %}
+
+{% block bodyID %}body-uploadTransformableImage{% endblock %}
+
+{% block menu-uploadTransformableImage %}active{% endblock %}
+
+
+{% block mainContent %}
+    {% if old_image_transf_builder != None %}
+        <h3 class="warning">{{ warning }}</h3>
+        <p>Your last image: <a href="{% url 'imageModifier:image_processing' user_prop.pk  %}">Modify the image</a></p>
+        <img class="old_image" src="{{ old_image_transf_builder.base_image.url }}">
+        <p><em>Image uploaded {{ old_image_transf_builder.upload_date|naturaltime }}</em></p>
+    {% endif %}
+    <h2>Transform your picture here!</h2>
+    <!-- FORM -->
+    <form id="formCompImage" action="" method="post"
+          enctype="multipart/form-data">
+        {% csrf_token %}
+        <h4>Step 1: {{ form.uploaded_image.label_tag }}</h4>
+
+        <p>{{ form.non_field_errors }}</p>
+
+        <p>
+            {{ form.uploaded_image.errors }}
+            {{ form.uploaded_image }}
+        </p>
+
+        <p><input type="submit" value="Upload"/></p>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "imageModifier/base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% block title %}Past campaigns participation{% endblock title %}
+{% block style %}{% endblock style %}
+{% block script %}{% endblock script %}
+
+
+{% block bodyID %}body-user_propositions_list{% endblock bodyID %}
+{% block menu-user_propositions_list %}active{% endblock %}
+
+
+{% block mainContent %}
+    <h2>Your current campaigns participation</h2>
+    {% if list_user_prop %}
+        {% for proposition in list_user_prop %}
+
+
+
+            <div class="transformation_block">
+                {% with transformation=proposition.transformedimagebuilder %}
+                    {% if transformation %}
+                        <span class="image_upload" data-id="{{ transformation.pk }}">
+                            <a href="{{ transformation.base_image.url }}" target="_blank"><img
+                                    src="{{ transformation.base_image.url }}"></a>
+                        </span>
+                        {% if transformation.intermediary_image %}
+                            <span class="image_changed" data-id="{{ transformation.pk }}">
+                                <a href="{{ transformation.intermediary_image.url }}" target="_blank"><img
+                                        src="{{ transformation.intermediary_image.url }}"></a>
+                            </span>
+                        {% endif %}
+                        <div class="update-info">
+                            <a href="{% url 'imageModifier:image_processing' proposition.pk %}">Modify image</a>
+                            <a href="{% url 'imageModifier:user_proposition_detail' proposition.pk %}">See details</a>
+                        </div>
+                    {% else %}
+                        <div class="update-info">
+                            <a href="{% url 'imageModifier:uploadTransformableImage' proposition.pk %}">Upload new image</a>
+                        </div>
+                    {% endif %}
+
+                    <p>
+                        Last update:
+                        <em>{% if transformation %}
+                            {{ transformation.last_update_date|naturaltime }}
+                        {% else %}
+                            {{ proposition.last_update_date|naturaltime }}
+                        {% endif %}</em>,
+                    Created: <em>{{ proposition.creation_date|naturaltime }}</em>,
+                    </p>
+                    <table>
+                        <tr>
+                            <td>Company name:</td>
+                            <td>{{ proposition.auction_element.company_proposition.campaign.company.name }}</td>
+                        </tr>
+                        {% if proposition.auction_element.company_proposition.expiration_date %}
+                            <tr>
+                                <td>Remaining time to make proposition:</td>
+                                <td>{{ proposition.auction_element.company_proposition.expiration_date }}</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td>Campaign headline:</td>
+                            <td>{{ proposition.auction_element.company_proposition.campaign.headline }}</td>
+                        </tr>
+                        <tr>
+                            <td>Money earnt:</td>
+                            <td>CHF {{ proposition.auction_element.final_payment|floatformat:2|intcomma }}</td>
+                        </tr>
+                    </table>
+
+                    {% if transformation.intermediary_image %}
+                        <div class="update-info">
+                            <a href="">Send image to company for validation</a>
+                        </div>
+                    {% endif %}
+                    </div>
+                    <hr>
+                {% endwith %}
+        {% endfor %}
+    {% else %}
+        <p>Sorry, you have not participated to a campaign yet.</p>
+    {% endif %}
+{% endblock mainContent %}
