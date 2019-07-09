@@ -1,6 +1,6 @@
 # Advertisement platform - Django
 
-This web platform allows social media users to advertise products in behalf of companies in fun and innovative ways.
+This web platform allows social media users to advertise products on behalf of companies in fun and innovative ways.
 
 This project focused on:
 - Platform architecture design
