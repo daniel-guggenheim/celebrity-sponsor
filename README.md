@@ -1,4 +1,4 @@
-# Advertisement platform
+# Advertisement platform - Django
 
 In this project, I designed and developed a web platform for advertisement in Django (Python). This project focused entirely on the platform design, back-end development and the minimum viable front-end (functionality was heavily prioritized over beauty).
 
