@@ -17,7 +17,6 @@
 
 
 {% block mainContent %}
-    {#<form action="{% url 'campaignManager:start_campaign' %}" method="post">#}
     <form action="" method="post">
 
         {% csrf_token %}
@@ -52,11 +51,6 @@
                     <hr>
                     <input type="submit" name="next_step" value="Web stars selected? Go to next page!"/>
                     <h2>Web star choices</h2>
-{#                    <p>Mean number of likes web stars must have:#}
-{#                        <input type="range" min="0" max="10000" value="0" default="0" step="100"#}
-{#                               onchange="showValue(this.value)"/>#}
-{#                        <span id="range">0</span>#}
-{#                    </p>#}
                 {% endif %}
                 <div class="fieldWrapper">
                     {{ field.errors }}
@@ -67,7 +61,6 @@
                 </div>
             {% endif %}
         {% endfor %}
-        {#        {{ proposition_form.as_p }}#}
         <input type="submit" name="next_step" value="Go to next page"/>
     </form>
 

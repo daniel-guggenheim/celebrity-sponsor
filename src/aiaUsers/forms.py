@@ -1,7 +1,6 @@
+from aiaUsers.models import UserDetails, BaseUserDetails
 from django import forms
 from django.utils import timezone
-
-from aiaUsers.models import UserDetails, BaseUserDetails
 
 COMPANY_NUM = BaseUserDetails.COMPANY_VAL
 WORKER_NUM = BaseUserDetails.WORKER_VAL

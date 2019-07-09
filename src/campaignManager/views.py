@@ -1,13 +1,11 @@
+from aiaUsers.models import BaseUserDetails
+from campaignManager.forms import CampaignForm, CompanyPropositionForm
+from campaignManager.models import Campaign, CompanyProposition
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-
-# Create your views here.
-from aiaUsers.models import BaseUserDetails
-from campaignManager.forms import CampaignForm, CompanyPropositionForm
-from campaignManager.models import Campaign, CompanyProposition
 
 
 def index(request):

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup',
-    # AllAuth and user
+
+    # -- AllAuth and user --
     'aiaUsers.apps.AiausersConfig',
     'django.contrib.sites',  # for allauth
     'allauth',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # 'allauth.socialaccount.providers.facebook',  # uncomment this line to use facebook login
     # 'allauth.socialaccount.providers.google',  # uncomment this line to use google login
+
     'campaignManager.apps.CampaignmanagerConfig',
     'django.contrib.humanize'
 ]

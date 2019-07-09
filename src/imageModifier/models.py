@@ -1,16 +1,12 @@
 import datetime
-from io import BytesIO
 import os
-
-from django.conf import settings
-
-from django.core.files.base import ContentFile
-
-from django.db import models
+from io import BytesIO
 
 from PIL import Image
-
-from aiaUsers.models import Company, UserDetails
+from aiaUsers.models import Company
+from django.conf import settings
+from django.core.files.base import ContentFile
+from django.db import models
 
 
 class CompanyLogoImage(models.Model):
@@ -33,7 +29,8 @@ class TransformedImageBuilder(models.Model):
     base_image = models.ImageField(upload_to='baseImages')
     intermediary_image = models.ImageField(upload_to='intermediaryImages', blank=True)
     company_logo = models.ForeignKey(CompanyLogoImage, null=True, blank=True, on_delete=models.SET_NULL)
-    user_proposition = models.OneToOneField('campaignManager.UserProposition', on_delete=models.CASCADE, null=True, blank=True)
+    user_proposition = models.OneToOneField('campaignManager.UserProposition', on_delete=models.CASCADE, null=True,
+                                            blank=True)
     image_parameter_logo_width = models.FloatField(null=True, blank=True)
     image_parameter_logo_left_position = models.FloatField(null=True, blank=True)
     image_parameter_logo_top_position = models.FloatField(null=True, blank=True)
@@ -95,7 +92,7 @@ class TransformedImageBuilder(models.Model):
         print("New file name is :" + new_image_name)
 
         image_io = BytesIO()
-        # TODO : if the image is not saved correctly, we loose the last image
+        # TODO : if the image is not saved correctly, keep the last image
         try:
             pil_intermediary_image.save(image_io, format=new_file_format)
             image_file = image_io.getvalue()
@@ -107,7 +104,6 @@ class TransformedImageBuilder(models.Model):
             else:
                 print("!! intermediary image attribute NOT erased !!")
             self.intermediary_image.save(new_image_name, ContentFile(image_file))
-            # self.intermediary_image.save()
         except:
             print("Problem in saving file. Last image might have been erased! Bug to correct!")
         finally:
@@ -118,9 +114,10 @@ class TransformedImageBuilder(models.Model):
         basename, extension = os.path.splitext(os.path.basename(file_name))
         return basename
 
-    # TODO implement this method
     def __possible_to_make_intermediary_image(self):
         """
+        TODO: implement
+
         Check if it is possible to make an intermediary image with the current class attributes.
         Check that the following class attributes are non-null: base_image, company_logo, logo_size, logo_position
         :return: boolean
@@ -139,15 +136,3 @@ class TransformedImage(models.Model):
     transformed_image_builder = models.OneToOneField(TransformedImageBuilder, on_delete=models.CASCADE)
     transformed_image = models.ImageField(upload_to='transformedImages')
     creation_date = models.DateTimeField('creation date')
-
-# def get_upload_path(name):
-#     return 'company_{0}'.format(name)
-
-
-# def user_directory_path(instance, filename):
-#     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-#     return 'user_{0}/{1}'.format(instance.user.id, filename)
-#
-#
-# class MyModel(models.Model):
-#     upload = models.FileField(upload_to=user_directory_path)

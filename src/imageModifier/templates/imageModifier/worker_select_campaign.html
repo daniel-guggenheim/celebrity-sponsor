@@ -19,8 +19,6 @@
                 selectedAuctionElem.addClass("selectedBorder");
                 selectedAuctionElem.removeClass("normalBorder");
                 lastAuctionElemSelected = selectedAuctionElem
-
-                {#        console.log(pk);#}
             });
         });
     </script>
@@ -46,16 +44,6 @@
 
 
         <div class="campaign_all">
-{#            {% with company_prop=company_propositions.0 %}#}
-{#                <div class="campaign_information">#}
-{#                    <h2>Related campaign information:</h2>#}
-{##}
-{#                    <p>Company: {{ company_prop.campaign.company.name }}</p>#}
-{##}
-{#                    <p>Payment: CHF {{ company_prop.money_that_will_be_paid_per_worker|floatformat:2|intcomma }}</p>#}
-{#                </div>#}
-{#            {% endwith %}#}
-
             <div class="campaign_list">
                 {% for auction_elem in auction_elements %}
                     {% with comp_prop=auction_elem.company_proposition %}
@@ -69,7 +57,6 @@
                     {% endwith %}
                 {% endfor %}
             </div>
-            {#        <hr width="1" size="500">#}
         </div>
     {% else %}
         <h2>Sorry, there is no auction yet to select. Come back later!</h2>

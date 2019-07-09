@@ -1,21 +1,7 @@
+from aiaUsers.models import UserDetails, BaseUserDetails
 from django.contrib.auth.models import User
 from django.test import TestCase
-
-
-# Create your tests here.
-
-
-# class UserDetailsTest(TestCase):
-#     def test_signup_with_worker_user(self):
-#         """
-#         a user should be created correctly with the method
-#         """
-#         c = Client()
-#         my_user = DefaultAccountAdapter.new_user(self, request)
-#         self.assertEqual(my_user, True)
-#
 from django.utils import timezone
-from aiaUsers.models import UserDetails, BaseUserDetails
 
 
 class BaseUserDetailsModelTest(TestCase):

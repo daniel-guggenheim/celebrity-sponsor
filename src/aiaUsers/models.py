@@ -1,11 +1,9 @@
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import DateTimeField
 
 
-# TODO: Change on_delete method of Company 'created_by' attribute
 class Company(models.Model):
     name = models.CharField(max_length=300)
     abrev_name = models.CharField(max_length=300, blank=True)
@@ -43,7 +41,6 @@ class BaseUserDetails(models.Model):
     linked_user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, related_name='user_details')
     user_type = models.IntegerField(null=True, choices=USER_TYPES)
     creation_date = DateTimeField()
-    # birth_date = models.DateField()
 
     class Meta:
         abstract = True
@@ -139,17 +136,18 @@ class WorkerUserDetails(models.Model):
     description = models.CharField(max_length=400, blank=True, null=True)
     last_auction = models.ForeignKey('campaignManager.Auction', on_delete=models.SET_NULL, null=True, blank=True)
     category = models.IntegerField(null=True, blank=True, choices=CATEGORY)
-    nb_of_followers_at_last_check = models.IntegerField(null=True,blank=True, default=0)
-    average_nb_of_like_in_10_last_pictures_at_last_check = models.DecimalField(max_digits=19, decimal_places=6, null=True, blank=True, default=0)
+    nb_of_followers_at_last_check = models.IntegerField(null=True, blank=True, default=0)
+    average_nb_of_like_in_10_last_pictures_at_last_check = models.DecimalField(max_digits=19, decimal_places=6,
+                                                                               null=True, blank=True, default=0)
     number_of_successful_past_collaborations = models.IntegerField(null=True, blank=True, default=0)
     last_check_social_media_information = models.DateTimeField(null=True, blank=True)
-
 
     class Meta:
         abstract = True
 
     def get_category_name(self):
         return self.CATEGORY(self.category)
+
     category_text = property(get_category_name)
 
 
@@ -158,6 +156,3 @@ class UserDetails(BaseUserDetails, CompanyUserDetails, WorkerUserDetails):
 
     class Meta:
         verbose_name_plural = "user details"
-
-# TODO : Check if I keep this creation. ====> NO!! ;)
-# User.details = property(lambda u: UserDetails.objects.get_or_create(user=u)[0])

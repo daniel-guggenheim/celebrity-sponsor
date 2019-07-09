@@ -2,7 +2,6 @@
  * Created by Daniel on 13.04.2016.
  */
 
-//Debugging : console.log(selectedLogoInGallery);
 
 // Selectors
 var logoDivSelector, logoImgSelector, containerSelector, selectedLogoInGallery = null
@@ -21,23 +20,9 @@ var ParametersToSend = {
 $(function () {
     initializeSelectors();
     setupBaseImageAndDraggableLogo();
-
     $("#saveButton").click(saveButtonActivation); // Make the image and go to a new window
-
     $("#gallery .image").click(manageLogoSwitch); // Manage the switch of the logo selection
-
-
-
-
     selectLogoInGallery($("#first-image"));
-
-
-
-
-
-
-
-
 });
 
 
@@ -81,9 +66,6 @@ function setupBaseImageAndDraggableLogo() {
         containment: "#container",
         minHeight: logoMinHeight,
         minWidth: logoMinWidth,
-        //resize: function (event, ui) {
-        //    $("#tempInfo2").text("Left: " + ui.position.left + "     Top: " + ui.position.top + "     Width: " + ui.size.width);
-        //}
     });
 
     ParametersToSend.container_reduction_ratio = ratioToDivideBy;
@@ -127,9 +109,7 @@ function manageLogoSwitch(event) {
     var img_tag = a_tag.children('img');
     var newsrc = img_tag.attr('src');
     logoImgSelector.attr("src", newsrc);
-
     selectLogoInGallery(a_tag.parent())
-
 }
 
 
@@ -148,12 +128,6 @@ function selectLogoInGallery(selector) {
     logoDivSelector.css({"width": logoImgSelector.css("width")});
     logoDivSelector.css({"height": logoImgSelector.css("height")});
 }
-
-
-
-
-
-
 
 
 // Initialize the selectors with the right id's from the HTML code

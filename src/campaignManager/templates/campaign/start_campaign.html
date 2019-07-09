@@ -10,7 +10,6 @@
 
 
 {% block mainContent %}
-{#<form action="{% url 'campaignManager:start_campaign' %}" method="post">#}
 <form action="" method="post">
     {% csrf_token %}
     {{ campaign_form.as_p }}

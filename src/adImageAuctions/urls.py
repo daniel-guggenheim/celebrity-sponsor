@@ -13,17 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from aiaUsers import views
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-
-# urlpatterns = patterns(
-#     (r'^', include('imageModifier.urls')),  # to remove later!
-#     (r'^imageModifier/', include('imageModifier.urls')),
-#     (r'^admin/', admin.site.urls),
-# ) + static(settings.MEDIA_URL, root=settings.MEDIA_ROOT)
-from aiaUsers import views
 
 urlpatterns = [
     url(r'^imageModifier/', include('imageModifier.urls')),
@@ -32,5 +26,4 @@ urlpatterns = [
     url(r'^campaign/', include('campaignManager.urls')),
     url(r'^accounts/', include('aiaUsers.urls')),
     url(r'^$', views.index, name='index'),
-    # url(r'^accounts/profile/', views.account_profile, name='account_profile'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

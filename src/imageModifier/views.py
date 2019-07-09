@@ -6,7 +6,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.utils.datastructures import MultiValueDictKeyError
-from django.views import generic
 
 from aiaUsers.models import BaseUserDetails, CompanyUserDetails
 from campaignManager.models import Campaign, Auction, AuctionElement, UserProposition
@@ -183,22 +182,6 @@ def user_propositions_list(request):
     return render(request, 'imageModifier/user_propositions_list.html', {'list_user_prop': list_user_prop})
 
 
-# @login_required
-# def create_and_show_transformable_image(request, pk, logo_pk, logo_width, logo_left_pos, logo_top_pos, ratio):
-#     print(str(pk))
-#     transform_image_builder = get_object_or_404(TransformedImageBuilder, pk=pk)
-#     new_company_logo = get_object_or_404(CompanyLogoImage, pk=logo_pk)
-#     transform_image_builder.company_logo = new_company_logo
-#     transform_image_builder.last_update_date = timezone.now()
-#     transform_image_builder.save()
-#     print(new_company_logo)
-#     print(transform_image_builder)
-#     transform_image_builder.make_intermediary_image(float(logo_width), float(logo_left_pos), float(logo_top_pos),
-#                                                     float(ratio))
-#     return render(request, 'imageModifier/user_proposition_detail.html',
-#                   {'transformedImageBuilder': transform_image_builder})
-
-
 def worker_select_campaign(request):
     """
     Shows the list of company to select for the worker. Will run an auction and compute everything it needs.
@@ -237,7 +220,6 @@ def worker_select_campaign(request):
                                               bid=proposition.money_that_will_be_paid_per_worker)
                 auction_elem.save()
                 auction_elem.make_bid()
-
 
     # Making the form get the chosen auction element back.
     if request.method != 'POST':

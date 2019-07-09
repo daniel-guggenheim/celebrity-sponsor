@@ -1,21 +1,12 @@
 import decimal
 
+from aiaUsers.models import Company
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
-from aiaUsers.models import Company, WorkerUserDetails
-
-
-# ------------------------------ Validators ------------------------------#
 from imageModifier.models import CompanyLogoImage
-
-
-def validate_percentage_logo_size(value):
-    if value > CompanyProposition.MAX_LOGO_SIZE_IN_PERCENTAGE or value < CompanyProposition.MIN_LOGO_SIZE_IN_PERCENTAGE:
-        raise ValidationError(_('Please enter a value between 0 and 1.'), params={'value': value}, )
 
 
 class Campaign(models.Model):
@@ -110,7 +101,6 @@ class AuctionElement(models.Model):
     final_quality_score = models.DecimalField(max_digits=19, decimal_places=6, null=True, blank=True)
     final_score = models.DecimalField(max_digits=19, decimal_places=6, null=True, blank=True)
     final_payment = models.DecimalField(max_digits=19, decimal_places=4, null=True, blank=True)
-    # relative_position = models.IntegerField(null=True, blank=True)
 
     class Meta:
         ordering = ['-final_score']
@@ -303,3 +293,8 @@ class AuctionElement(models.Model):
     def __compute_payment(self):
         self.final_payment = self.bid
         self.save()
+
+
+def validate_percentage_logo_size(value):
+    if value > CompanyProposition.MAX_LOGO_SIZE_IN_PERCENTAGE or value < CompanyProposition.MIN_LOGO_SIZE_IN_PERCENTAGE:
+        raise ValidationError(_('Please enter a value between 0 and 1.'), params={'value': value}, )
