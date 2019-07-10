@@ -14,6 +14,10 @@ You can find all the code in the ``src/`` folder.
 [Demo](#Demo) - Short video of the platform in action<br>
 [Project Idea](#Project-idea) - How does it work<br>
 [Architecture design](#Architecture-design) - An overview of the platform architecture and the choices that lead to it<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[Main requirements](#Main-requirements)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#Overview)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[Detailed class diagrams](#Detailed-class-diagrams)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[Implementation](#Implementation)<br>
 [Project requirements](#Project-requirements) - Requirements to run the project
 
 
@@ -50,8 +54,9 @@ Following is a summary of the steps that will be done on the platform:
 
 ## Architecture design
 
-### Matching requirements
-The main problem that needs to be solved, is how to match the workers (web celebrities) and the companies. Looking at the goals of each actor, we have that:
+
+### Main requirements
+The main problem that needs to be solved, is how to *match* the workers (web celebrities) and the companies. Looking at the goals of each actor, we have that:
 
 1. The companies want to:
     1. Maximize their positive visibility.
@@ -104,9 +109,11 @@ All the classes highlighted in the description above were implemented. Some mino
 <img src="github_content/uml.png" alt="uml diagram of the architecture" width="80%">
 
 ### Implementation
-The user classes have been described in ``src/aiaUsers``. ``src/campaignManager`` handles everything related to the campaign, including the ``CompanyProposition``, the ``UserProposition`` and everything related to the ``Auction``. ``src/imageModifier`` handles the image transformation, both the JavaScript in the frontend that allow the celebrity to modify the image in the browser, and the backend that perform the final transformation using the python *PIL* library.
+The user classes have been described in ``src/aiaUsers``.<br />
+``src/campaignManager`` handles everything related to the campaign, including the ``CompanyProposition``, the ``UserProposition`` and everything related to the ``Auction``.<br />
+``src/imageModifier`` handles the image transformation, both the JavaScript in the frontend that allows the celebrity to modify the image in the browser, and the backend that performs the final transformation using the python *PIL* library.
 
-User management and authorization has been entirely handled. The celebrity users and company users each have access to different part of the platform, and anonymous users are always redirected to a login page when trying to access any secured page.
+User management and authorizations have been entirely handled. The celebrity users and company users each have access to different part of the platform and cannot access the other user sections. Anonymous users are always redirected to a login page when trying to access any secured page.
 
 ## Project requirements
 This project uses Python 3.5 with Django 1.9.<br>
