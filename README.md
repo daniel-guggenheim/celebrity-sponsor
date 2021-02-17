@@ -1,9 +1,8 @@
 # Advertisement platform (2016)
 
-Allows social media users to advertise on behalf of companies in fun and innovative ways.
+Allows social media users to advertise on behalf of companies in fun and innovative ways:
 
-## The Idea
-1. A company is connected to a web celebrity.<br/>
+1. A company is connected to a web celebrity via an auction system.<br/>
 <img src="github_content/step1.png" alt="step 1" width="400">
 
 2. The web celebrity creates an image endorsing the company.<br/>
