@@ -1,18 +1,32 @@
-# Advertisement platform - Django
+# Advertisement platform (2016)
 
-This web platform allows social media users to advertise products on behalf of companies in fun and innovative ways.
+Allows social media users to advertise on behalf of companies in fun and innovative ways.
+
+## The Idea
+1. A company is connected to a web celebrity.<br/>
+<img src="github_content/step1.png" alt="step 1" width="400">
+
+2. The web celebrity creates an image endorsing the company.<br/>
+<img src="github_content/step2.jpg" alt="step 2" width="700">
+
+3. The web celebrity posts the image on social media.<br/>
+<img src="github_content/step3.jpg" alt="step 3" width="570">
+
+4. The company renumerates the web celebrity.<br/>
+<img src="github_content/step4.png" alt="step 4" width="250">
+
+The main idea is to have "social media celebrities" advertise on behalf of companies. These web celebrities will select products they like, from companies they like and advertise the product on their social media accounts. In contrary to ads you can find on Google or Facebook that are separated from the content produced by users, the ad will be directly integrated to a picture the celebrity creates.
+
+## The Project
 
 This project focused on:
 - Platform architecture design
 - Backend development: **Django** (Python), with some additionnal libraries (*PIL* for the image processing or *allauth* to handle logins with social media.)
 - Minimum viable front-end (functionality was heavily prioritized over beauty): **HTML/CSS/JavaScript**, and **jQuery** for the image manipulation.
 
-You can find all the code in the ``src/`` folder.
-
 **Table of Contents:**
 
 [Demo](#Demo) - Short video of the platform in action<br>
-[Project Idea](#Project-idea) - How does it work<br>
 [Architecture design](#Architecture-design) - An overview of the platform architecture and the choices that lead to it<br>
 &nbsp;&nbsp;&nbsp;&nbsp;[Main requirements](#Main-requirements)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;[Overview](#Overview)<br>
@@ -31,24 +45,6 @@ Here is a 1 minute demo of the final project (everything you see is working in t
     <br />
     <em>Clicking on the video will take you to youtube</em>
 </p>
-
-## Project Idea
-The main idea is to have "social media celebrities" advertise on behalf of companies.
-
-These web celebrities will select products they like, from companies they like and advertise the product on their social media accounts. In contrary to ads you can find on Google or Facebook that are separated from the content produced by users, the ad will be directly integrated to a picture the celebrity creates.
-
-Following is a summary of the steps that will be done on the platform:
-1. A company is connected to a web celebrity.<br/>
-<img src="github_content/step1.png" alt="step 1" width="400">
-
-2. The web celebrity creates an image endorsing the company.<br/>
-<img src="github_content/step2.jpg" alt="step 2" width="700">
-
-3. The web celebrity posts the image on social media.<br/>
-<img src="github_content/step3.jpg" alt="step 3" width="570">
-
-4. The company renumerates the web celebrity.<br/>
-<img src="github_content/step4.png" alt="step 4" width="250">
 
 
 
